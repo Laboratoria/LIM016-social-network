@@ -1,0 +1,163 @@
+
+* {
+    box-sizing: border-box;
+    margin:0;
+    padding:0 ;   
+     
+    }
+.logoLogin{
+display: block;
+margin: auto;
+width: 50%;
+margin-bottom: 30px;
+}
+h1{  
+  color: #64AED1;
+  margin: auto !important;
+  font-family: 'Turret Road', cursive;   
+  display: flex;
+  justify-content: center;
+
+}
+.sectionWelcome{
+background: url( "./images/bgNetcoins.jpg");
+width: 100%;
+height: 625px;
+background-position: center;
+background-size: cover;
+display: none;
+}
+.containerLogin{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    }
+.containerLogin .sectionLogin{
+width: 100%;
+height: 625px;
+background: white;
+padding: 20px;
+
+}
+.containerLogin .sectionLogin .login{
+    margin: auto;
+    width: 100%;
+    background: rgba(91, 158, 209, 0.419);
+    border-radius: 20px;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;      
+}
+.containerInputs{
+    width: 100%;
+   /*  height: 30%  ; */
+  /*   background: chartreuse; */
+  
+    margin: auto;
+}
+.containerInputs .inputUser{
+    
+display: block;
+width: 230px;
+height: 40px;
+padding: 10px;
+border-radius: 10px;
+border-color: whitesmoke;
+margin: 20px auto ;
+
+}
+.containerInputs .inputPassword{
+display: block;
+width: 230px;
+height: 40px;
+padding: 10px;
+border-radius: 10px;
+border-color: whitesmoke;
+margin: 0 auto 20px;
+}
+.loginIcons{
+  margin-top: 10px;
+display: flex;
+flex-direction: row;
+justify-content: center;
+}
+.loginIcons a{
+  display: inline-block;
+  margin: 5px;
+  }
+ 
+.loginIcons a img{
+ display: inline-block;
+ width: 35px;
+ margin: 5px;
+}
+.lbl{
+
+color: #3674b6; 
+display: flex;
+justify-content: center;
+margin-top: 20px;
+ 
+}
+.lblCuenta{
+  color: #006fe6; 
+  margin: 5px;
+}
+.lblRegistrate{
+  color: #006fe695; 
+  margin: 5px;
+}
+.groupLbl{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+}
+/* --------------------------------------------------- */
+
+.btn {
+    display: block;
+    margin: auto;
+    width: 80px;
+    height: 40px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    background-color: transparent;
+    border-radius: 0.6em;
+    cursor: pointer;
+  
+    font-size: 14px;
+    line-height: 1;
+    margin: auto;
+    padding: 10px;
+    margin-top: 20px; 
+  
+    text-decoration: none;
+    text-align: center;
+   /*   font-family: 'Flamenco', cursive; */
+  
+  }
+  .btn:hover, .btn:focus {
+    color: #fff;
+    outline: 0;
+  }
+  .third {
+    border-color: #3498db;
+    letter-spacing: 0.5px;
+    text-align: center !important;
+    font-weight: bold;
+    color: #fff;
+    /* text-shadow: 2px 2px 2px blue; */
+    box-shadow: 0 0 40px 40px #64AED1 inset, 0 0 0 0 #64AED1;
+    -webkit-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+  }
+  .third:hover {
+      color: #64AED1;
+    box-shadow: 0 0 10px 0 #3498db inset, 0 0 10px 4px #006fe6;
+  }
