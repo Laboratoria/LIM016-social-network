@@ -2,20 +2,13 @@
 
 export const myFunction = () => {
   // aqui tu codigo
-  console.log('Hola mundo!');
+
 };
 
-
-let login = document.getElementById("login");
-
-
-login.innerHTML = loginTemplate();
+const login = document.getElementById('login');
 
 function loginTemplate() {
-
-  return `
-  
-  <div class="containerInputs">
+  return `<div class="containerInputs">
   <img class="logoLogin" src="./images/logoNetcoins.png" alt="">
 
   <h1 >Netcoins</h1>
@@ -27,14 +20,18 @@ function loginTemplate() {
    <a href=""><img  src="./images/logo-facebook.png" alt=""></a> 
     <a href=""><img  src="./images/logo-gmail.png" alt=""></a>
      <a href=""><img  src="./images/icono-twitter.png" alt=""></a>
+     <button id="authGoogle"> Login with Google </button>
+     <button id="authFacebook"> Login with Facebook </button>
+     <button id="authTwitter"> Login with Twitter </button>
+     <input id="createUserEmail" type="text" placeholder="Email...">
+     <input id="createUserPassword" type="text" placeholder="Password...">
      </div>
      <div class="groupLbl">  
      <label class="lblCuenta" for="">¿No tienes una cuenta?</label>
      <label class="lblRegistrate" for="">Registrate</label>
      </div>
   
-  </div> 
- 
-  `
-
+  </div>`;
 }
+
+login.innerHTML = loginTemplate();
