@@ -18,13 +18,9 @@ function loginTemplate() {
   <label class="lbl" for=""> o ingresa con:</label>
   <div class="loginIcons">    
    <a href=""><img  src="./images/logo-facebook.png" alt=""></a> 
-    <a href=""><img  src="./images/logo-gmail.png" alt=""></a>
+    <a href=""><img  src="./images/logo-gmail.png" id="authGoogle" alt=""></a>
      <a href=""><img  src="./images/icono-twitter.png" alt=""></a>
-     <button id="authGoogle"> Login with Google </button>
      <button id="authFacebook"> Login with Facebook </button>
-     <button id="authTwitter"> Login with Twitter </button>
-     <input id="createUserEmail" type="text" placeholder="Email...">
-     <input id="createUserPassword" type="text" placeholder="Password...">
      </div>
      <div class="groupLbl">  
      <label class="lblCuenta" for="">¿No tienes una cuenta?</label>
