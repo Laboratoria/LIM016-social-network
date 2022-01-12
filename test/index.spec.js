@@ -5,4 +5,7 @@ describe('myFunction', () => {
   it('debería ser una función', () => {
     expect(typeof myFunction).toBe('function');
   });
+  it('retorna 2 ', () => {
+    expect(myFunction(2)).toBe(2);
+  });
 });
