@@ -35,17 +35,20 @@ const profileRegister = () => {
   divElement.innerHTML = viewRegister;
 
   const formProfileRegister = divElement.querySelector('#profileRegister');
+  let uidUser;
   userStateChange((user) => {
     if (user) {
       const inputEmail = document.getElementById('inputemail');
       const email = user.email;
+      uidUser = user.uid;
       inputEmail.value = email;
-      console.log(email);
+      console.log(email, uidUser);
       console.log('usuario ha iniciado sesion');
     } else {
-      // User is signed out
+    // User is signed out
       console.log('usuario ha cerrado sesion');
     }
+    return uidUser;
   });
 
   formProfileRegister.addEventListener('submit', (e) => {
@@ -60,8 +63,19 @@ const profileRegister = () => {
     const phone = document.getElementById('phone').value;
     const description = document.getElementById('introduceYourself').value;
     console.log('Entraste al registro del perfil');
-    console.log(photo, name, nickname, ocupation, email, gender, age, phone, description);
-    saveUserProfile(photo, name, nickname, ocupation, email, gender, age, phone, description);
+    console.log(photo, name, nickname, ocupation, email, gender, age, phone, description, uidUser);
+    saveUserProfile(
+      photo,
+      name,
+      nickname,
+      ocupation,
+      email,
+      gender,
+      age,
+      phone,
+      description,
+      uidUser,
+    );
     window.location.hash = '#/news';
   });
 

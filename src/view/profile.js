@@ -1,4 +1,8 @@
+/* eslint-disable import/named */
+/* eslint-disable no-console */
 import { viewHeader } from './header.js';
+import { getDataUserProfile } from '../lib/firebase/firestore.js';
+import { userStateChange } from '../lib/firebase/auth.js';
 
 const profile = () => {
   const viewProfile = `
@@ -6,6 +10,7 @@ const profile = () => {
       <input type="file" id="photoFile" class="photoFile" style="display:none">
       <img src= "../img/iconfemale.png" id="userPhoto" alt="imagen-perfil" class = "userPhoto">
       <h4 class= "fullNameProfile" id = "fullNameProfile"> Kaly Zulema Cristobal Alcantara</h4>
+      <i class="far fa-edit"></i> 
       <h4 class = "" id =""> Nickname </h4>
       <h4 class = "" id =""> Ocupación </h4>
       <h4 class = "" id =""> Correo Electrónico </h4>
@@ -49,6 +54,22 @@ const profile = () => {
   const divElement = document.createElement('div');
   divElement.setAttribute('id', 'content');
   divElement.innerHTML = viewHeader + viewProfile;
+
+  let uidUser;
+  userStateChange((user) => {
+    if (user) {
+      uidUser = user.uid;
+      console.log('usuario esta logueado');
+      getDataUserProfile(uidUser)
+        .then((result) => { console.log(result); })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+    // User is signed out
+      console.log('usuario ha cerrado sesion');
+    }
+  });
   return divElement;
 };
 

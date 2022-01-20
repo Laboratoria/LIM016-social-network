@@ -204,26 +204,6 @@ const login = () => {
 };
 
 // userStateChange((user) => {
-//   const inputEmail = document.getElementById('inputemail');
-//   if (user) {
-//     // User is signed in, see docs for a list of available properties
-//     // https://firebase.google.com/docs/reference/js/firebase.User
-//     const name = user.displayName;
-//     const email = user.email;
-//     const emailVerified = user.emailVerified;
-//     const uid = user.uid;
-//     const phone = user.phoneNumber;
-//     const photo = user.photoURL;
-//     console.log(uid, email, emailVerified, name, photo, phone);
-//     inputEmail.value = email;
-//     console.log('usuario ha iniciado sesion');
-//   } else {
-//     // User is signed out
-//     console.log('usuario ha cerrado sesion');
-//   }
-// });
-
-// userStateChange((user) => {
 //   if (user) {
 //     // const user = auth.currentUser;
 //     const displayName = user.displayName;
