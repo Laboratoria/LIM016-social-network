@@ -8,8 +8,10 @@ const news = () => {
     <h1> viewNews </h1>
 `;
   const divElement = document.createElement('div');
-  divElement.setAttribute('id', 'content');
+  divElement.setAttribute('id', 'contentNews');
+  divElement.setAttribute('class', 'contentNews');
   divElement.innerHTML = viewHeader + viewNews;
+
   const logOut = divElement.querySelector('#logOut');
   logOut.addEventListener('click', () => {
     logOutUser()
