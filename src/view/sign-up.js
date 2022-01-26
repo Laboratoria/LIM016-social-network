@@ -11,7 +11,7 @@ const signUp = () => {
   const viewSignUp = `
     <form class='formSignUp' id='formSignUp'>
       <h2 class = 'tituloSignUp'>Regístrate</h2>    
-      <input type='text' placeholder='Ingrese su usuario' id ='userSignUp' class='userSignUp'>
+      <input type='text' placeholder='Ingrese su nombre' id ='nameSignUp' class='nameSignUp'>
       <input type='text' placeholder='Ingrese su correo electrónico' id ='emailSignUp' class='emailSignUp'>
       <div class="eye">
       <span class='iconEye'><i class="fas fa-eye-slash"></i></span>
@@ -28,7 +28,7 @@ const signUp = () => {
   divElement.setAttribute('id', 'contentSignUp');
   divElement.setAttribute('class', 'contentSignUp');
   divElement.innerHTML = viewSignUp;
-  const userSignUp = divElement.querySelector('#userSignUp');
+  const nameSignUp = divElement.querySelector('#nameSignUp');
   const emailSignUp = divElement.querySelector('#emailSignUp');
   const pass = divElement.querySelector('#passSignUp');
   const icon = divElement.querySelector('i');
@@ -46,29 +46,29 @@ const signUp = () => {
   });
   // obteniendo el formulario de registro del usuario
   const userRegister = divElement.querySelector('#formSignUp'); // divElement ya es un elemento de html
-
   // Evento para crear un usuario
   userRegister.addEventListener('submit', (event) => {
     // const textVerified = document.getElementById('textVerified');
-
     // Evita que se recargue la página web inmediatamente
     event.preventDefault();
-
     // funcion para crear un usuario en firebase auth
     createUser(emailSignUp.value, pass.value)
       .then((userCredential) => {
+        console.log(userCredential);
         // PONER FUNCION PARA LIMPIAR FORMULARIO
         const credencialUsuario = userCredential.user;
         const uid = userCredential.user.uid;
         const correo = userCredential.user.email;
         const correoVerificado = userCredential.user.emailVerified;
+        // const name = userCredential.user.auth.name;
         // emailVerified es verficar correo validos que existe en gmail -ojo
         console.log(credencialUsuario, correo, uid, correoVerificado);
         console.log('El usuario se creo correctamente', emailSignUp.value, ' y ', pass.value);
         emailVerification()
           .then(() => {
             console.log('Se ha enviado un mensaje de verficicacion al correo ');
-            saveUser(emailSignUp.value, pass.value, userSignUp.value, uid);
+            saveUser(emailSignUp.value, pass.value, nameSignUp.value, uid, ' ');
+            console.log('entre a saveUser');
             window.location.hash = '#/profileRegister';
 
             // cerrar sesion
@@ -98,7 +98,7 @@ const signUp = () => {
           console.log(
             'las cuentas de correo electrónico / contraseña no están habilitadas. Habilite las cuentas de correo electrónico / contraseña en Firebase Console, en la pestaña Auth.',
           );
-        } else if (userSignUp.value === '' || emailSignUp.value === '' || pass.value === '') {
+        } else if (nameSignUp.value === '' || emailSignUp.value === '' || pass.value === '') {
           console.log('Debes completar todos los campos');
         }
         // console.log(errorCode, errorMessage);

@@ -1,6 +1,6 @@
 const viewHeader = `
   <header>
-    <div class = "tituloNews"><h2>Sinchi warmi</h2></div>   
+    <div class = "tituloNews"><h2>Sinchi Warmi</h2></div>   
     <nav>
       <ul class="menu__items">
         <li><a><img src="https://img.icons8.com/ios/50/000000/sos.png"/></a></li>

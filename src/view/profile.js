@@ -1,7 +1,7 @@
 /* eslint-disable import/named */
 /* eslint-disable no-console */
 import { viewHeader } from './header.js';
-import { getDataUserProfile } from '../lib/firebase/firestore.js';
+import { getDataUserProfile, nombre, nick } from '../lib/firebase/firestore.js';
 import { userStateChange } from '../lib/firebase/auth.js';
 
 const profile = () => {
@@ -9,12 +9,12 @@ const profile = () => {
     <div class= "viewProfile">
       <input type="file" id="photoFile" class="photoFile" style="display:none">
       <img src= "../img/iconfemale.png" id="userPhoto" alt="imagen-perfil" class = "userPhoto">
-      <h4 class= "fullNameProfile" id = "fullNameProfile"> Kaly Zulema Cristobal Alcantara</h4>
-      <i class="far fa-edit"></i> 
-      <h4 class = "" id =""> Nickname </h4>
-      <h4 class = "" id =""> Ocupación </h4>
-      <h4 class = "" id =""> Correo Electrónico </h4>
-      <h5 class = "" id =""> Teléfono </h5>
+      <p class="fullNameProfile" id="fullNameProfile"></p>
+      <span class='iconEditPhoto'><i class="far fa-edit"></i></span>
+      <p class="nicknameProfile" id ="nicknameProfile"></p>
+      <p class = "ocupacionProfile" id ="ocupacionProfile"></p>
+      <p class = "emailProfile" id ="emailProfile"></p>
+      <p class = "telefonoProfile" id ="telefonoProfile"></p>
       <section class= "conteoPerfil">
         <div class = "conteoPublicaciones">
           <h3 class="conteo">124</h3>
@@ -54,14 +54,27 @@ const profile = () => {
   const divElement = document.createElement('div');
   divElement.setAttribute('id', 'content');
   divElement.innerHTML = viewHeader + viewProfile;
-
+  const fullNameProfile = divElement.querySelector('#fullNameProfile');
+  const nicknameProfile = divElement.querySelector('#nicknameProfile');
+  const iconEditPhoto = divElement.querySelector('.iconEditPhoto');
+  iconEditPhoto.addEventListener('click', () => {
+    window.location.hash = '#/profileRegister';
+  });
   let uidUser;
   userStateChange((user) => {
     if (user) {
       uidUser = user.uid;
+      // const email = user.email;
+      // emailProfile.value = email;
+      console.log(user, uidUser);
       console.log('usuario esta logueado');
       getDataUserProfile(uidUser)
-        .then((result) => { console.log(result); })
+        .then((result) => {
+          fullNameProfile.innerHTML = nombre;
+          nicknameProfile.innerHTML = nick;
+          console.log(result);
+        // result[0].age para llamar a la propiedad
+        })
         .catch((err) => {
           console.log(err);
         });
