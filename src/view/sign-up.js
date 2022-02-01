@@ -67,7 +67,7 @@ const signUp = () => {
         emailVerification()
           .then(() => {
             console.log('Se ha enviado un mensaje de verficicacion al correo ');
-            saveUser(emailSignUp.value, pass.value, nameSignUp.value, uid, ' ');
+            saveUser(emailSignUp.value, pass.value, nameSignUp.value, uid);
             console.log('entre a saveUser');
             window.location.hash = '#/profileRegister';
 

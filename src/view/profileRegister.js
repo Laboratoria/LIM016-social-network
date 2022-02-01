@@ -1,10 +1,11 @@
 /* eslint-disable no-console */
 import { userStateChange } from '../lib/firebase/auth.js';
-import { getDataUser, nombre, nick } from '../lib/firebase/firestore.js';
+import { saveProfile } from '../lib/firebase/firestore.js';
+// import { getDataUser, nombre, nick } from '../lib/firebase/firestore.js';
 
 const profileRegister = () => {
   const viewRegister = `
-  <form class="profileRegister" id = 'profileRegister'>
+  <form class="profileRegister" id='profileRegister'>
   <h2 class ='tituloProfileRegister'>Ingresa tus datos</h2>
   <hr>
   <img class ='camera' src='../img/camara.png' id='camera' > </a>
@@ -33,40 +34,51 @@ const profileRegister = () => {
   divElement.setAttribute('id', 'contentProfileRegister');
   divElement.setAttribute('class', 'contentProfileRegister');
   divElement.innerHTML = viewRegister;
-  const inputEmail = divElement.querySelector('#inputEmail');
+  const camera = divElement.querySelector('#camera');
   const fullName = divElement.querySelector('#fullName');
-  // const nickname = divElement.querySelector('#nickName');
-  /* const photo = divElement.querySelector('#photo');
-  const ocupation = divElement.querySelector('#ocupation').value;
-  const gender = divElement.querySelector('#gender').value;
-  const age = divElement.querySelector('#age').value;
-  const phone = divElement.querySelector('#phone').value;
-  const introduceYourself = divElement.querySelector('#introduceYourself').value; */
+  const nickName = divElement.querySelector('#nickName');
+  const ocupation = divElement.querySelector('#ocupation');
+  const inputEmail = divElement.querySelector('#inputEmail');
+  const gender = divElement.querySelector('#gender');
+  const age = divElement.querySelector('#age');
+  const phone = divElement.querySelector('#phone');
+  const introduceYourself = divElement.querySelector('#introduceYourself');
   const formProfileRegister = divElement.querySelector('#profileRegister');
+  let email;
+  let uid;
+  userStateChange((user) => {
+    if (user) {
+      // USER es una funcion de firebase que trae sus propiedades como el uid. USER es del auth
+      email = user.email;
+      inputEmail.value = email;
+      uid = user.uid;
+      console.log('usuario ha iniciado sesion', uid);
+      // saveUser(inputEmail.value, fullName.value, uid, nickname.value);
+      /* getDataUser(uid)
+        .then((result) => {
+          fullName.value = nombre;
+          console.log(result);
+        // result[0].age para llamar a la propiedad
+        })
+        .catch((err) => {
+          console.log(err);
+        }); */
+    } else console.log('usuario ha cerrado sesion');
+  });
   formProfileRegister.addEventListener('submit', (e) => {
     e.preventDefault();
-    userStateChange((user) => {
-      if (user) {
-        // USER es una funcion de firebase que trae sus propiedades como el uid
-        const email = user.email;
-        inputEmail.value = email;
-        // const uid = user.uid;
-        console.log('usuario ha iniciado sesion');
-        // saveUser(inputEmail.value, fullName.value, uid, nickname.value);
-        /* getDataUser(uid)
-          .then((result) => {
-            fullName.value = nombre;
-            console.log(result);
-          // result[0].age para llamar a la propiedad
-          })
-          .catch((err) => {
-            console.log(err);
-          }); */
-      } else {
-        // User is signed out
-        console.log('usuario ha cerrado sesion');
-      }
-    });
+    saveProfile(
+      camera.src,
+      fullName.value,
+      nickName.value,
+      ocupation.value,
+      inputEmail.value,
+      gender.value,
+      age.value,
+      phone.value,
+      introduceYourself.value,
+      uid,
+    );
     window.location.hash = '#/news';
     console.log('Entraste al registro del perfil');
     // console.log(photo, name, nickname, ocupation, email, gender, age, phone, description);

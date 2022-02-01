@@ -19,57 +19,69 @@ import {
 import { swapp } from './config.js';
 
 const db = getFirestore(swapp); // inicializar la BD
-let addDocRef;
-let documentFirestoreId;
+// let documentFirestoreId;
 // Función para guardar el usuario registrado
-const saveUser = async (
-  email,
-  password,
-  nameUser,
-  uid,
-  nickname,
-  /* photo,
-  ocupation,
-  gender,
-  age,
-  phone,
-  description, */
-) => {
+const saveUser = async (email, password, nameUser, uid) => {
   try {
-    addDocRef = await addDoc(collection(db, 'users'), {
+    const addDocRef = await addDoc(collection(db, 'users'), {
       // nuevo doc con su par clave-valor
       email,
       password,
       nameUser,
       uid,
-      nickname,
-      /* photo,
-      ocupation,
-      gender,
-      age,
-      phone,
-      description, */
     });
-    console.log('Documento escrito con su ID: ', addDocRef.uid);
-    // newCityRef = doc(collection(db, 'users'));
-    /* await setDoc(newCityRef, {
-      email,
-      password,
-      nameUser,
-      uid,
-      nickname,
-    }); */
-    documentFirestoreId = addDocRef.id;
-    // await setDoc(newCityRef, data);
+    console.log('Documento escrito con su ID: ', addDocRef.id);
   } catch (e) {
     console.error('Error al añadir el documento: ', e);
   }
 };
+const saveProfile = (
+  photo,
+  fullName,
+  nickname,
+  ocupation,
+  email,
+  gender,
+  age,
+  phone,
+  description,
+  id,
+) => {
+  try {
+    const addDocProfile = addDoc(collection(db, 'prof'), {
+      photo,
+      fullName,
+      nickname,
+      ocupation,
+      email,
+      gender,
+      age,
+      phone,
+      description,
+      id,
+    });
+    console.log('Documento escrito con su ID: ', addDocProfile.id);
+  } catch (e) {
+    console.error('Error al añadir el documento: ', e);
+  }
+};
+/* const likes = (like, id) => {
+  try {
+    const addDocLike = addDoc(collection(db, 'likes'), {
+      like,
+      id,
+    });
+    console.log('Documento escrito con su ID: ', addDocLike.id);
+  } catch (e) {
+    console.error('Error al añadir el documento: ', e);
+  }
+}; */
 
-let nombre;
+/* let nombre;
 let nick;
-let users;
-const getDataUser = async (uidUserParam) => {
+let users; */
+
+/* const getDataUser = async (uidUserParam) => {
   // const docRef = doc(db, 'users', 'addDocRef.id');
   const docRef = query(collection(db, 'users'));
   const docSnap = await getDoc(docRef);
@@ -83,16 +95,25 @@ const getDataUser = async (uidUserParam) => {
     // doc.data() will be undefined in this case
     console.log('No such document!');
   }
-};
+}; */
 // Función para guardar el datos del  formulario de perfil del usuario registrado
 
-// obtener data de perfil del usuario
-// Get a list of cities from your database
-// const getDataUserProfile = async () => {
-//   const profileSnapshot = await getDocs(collection(db, 'profile'));
-//   const userProfileList = profileSnapshot.docs.map((doc) => doc.data());
-//   return console.log(userProfileList);
-// };
+// funcion para obtener la data de perfil del usuario
+const getDataUserProfile = async (uidUserParam) => {
+  const queryDataUser = query(collection(db, 'prof'), where('id', '==', uidUserParam));
+  // cuando el ID del firestore sea igual al uid del auth
+  const querySnapshot = await getDocs(queryDataUser);
+  const dataUser = querySnapshot.docs.map((docSnap) => docSnap.data());
+  return dataUser;
+};
+
+/* const getDataUserLike = async (uidUserParam) => {
+  const queryDataUser = query(collection(db, 'likes'), where('id', '==', uidUserParam));
+  // cuando el ID del firestore sea igual al uid del auth
+  const querySnapshot = await getDocs(queryDataUser);
+  const dataUser = querySnapshot.docs.map((docSnap) => docSnap.data());
+  return dataUser;
+}; */
 
 /* const getDataUserProfile = async (uidUserParam) => {
   const queryDataUser = query(collection(db, 'users'), where('uid', '==', uidUserParam));
@@ -110,15 +131,15 @@ const getDataUser = async (uidUserParam) => {
     }
   return console.log(dataUser);
 }; */
-const getDataUserProfile = async (uidUser) => {
+/* const getDataUserProfile = async (uidUser) => {
   const queryDataUser = query(collection(db, 'user'), where('uid', '==', uidUser));
   const querySnapshot = await getDocs(queryDataUser);
   const dataUser = querySnapshot.docs.map((docu) => docu.data());
   return dataUser;
-};
+}; */
 // POSTS
 // Guardar los post
-const savePost = (description) => addDoc(collection(db, 'posts'), { description });
+const savePost = (description, name, uid) => addDoc(collection(db, 'posts'), { description, name, uid });
 
 // Obtener todos  los documentos (los post)
 const getPost = () => getDocs(collection(db, 'posts'));
@@ -133,13 +154,13 @@ const deletePost = (id) => deleteDoc(doc(db, 'posts', id));
 const getDocPost = (id) => getDoc(doc(db, 'posts', id));
 
 // Actualizando un documento del  post
-const updateDocPost = (id, newFields) => updateDoc(doc(db, 'posts', id), newFields);
+const updateDocPost = (id, newFields) => {
+  updateDoc(doc(db, 'posts', id), newFields);
+};
 export {
   saveUser,
-  getDataUser,
-  nombre,
-  nick,
-  documentFirestoreId,
+  saveProfile,
+  // getDataUserLike,
   getDataUserProfile,
   savePost,
   getPost,
@@ -147,4 +168,5 @@ export {
   deletePost,
   getDocPost,
   updateDocPost,
+  // likes,
 };
