@@ -1,5 +1,10 @@
-// Este es el punto de entrada de tu aplicacion
+import { componentsViews } from './view-controller/router.js';
 
-import { myFunction } from './lib/index.js';
+const init = () => {
+    console.log("Iniciando inicio");
+    componentsViews(window.location.hash) 
+    window.addEventListener('hashchange', () => 
+    componentsViews(window.location.hash)); 
+}
+window.addEventListener('load', init);
 
-myFunction();
